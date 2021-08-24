@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Message } from '@humans/api-interfaces';
 
 @Component({
   selector: 'humans-root',
@@ -8,6 +6,9 @@ import { Message } from '@humans/api-interfaces';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  hello$ = this.http.get<Message>('/api/hello');
-  constructor(private http: HttpClient) {}
+  title = 'Classify-Your-Humans';
+  links = [
+    { path: '/', icon: 'home', title: 'Login' },
+    { path: 'friends', icon: 'view_list', title: 'Friends-List' },
+  ];
 }

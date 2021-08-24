@@ -1,0 +1,75 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title *ngIf="currentFriend.id; else createNew">
+      <h1>Update {{ originalName }}</h1>
+    </mat-card-title>
+    <ng-template #createNew>
+      <h1>Create a New Friend</h1>
+    </ng-template>
+  </mat-card-header>
+  <form
+    [formGroup]="form"
+    #formDirective="ngForm"
+    (ngSubmit)="saveForm(formDirective)"
+  >
+    <mat-card-content>
+      <mat-form-field class="full-width" appearance="outline" floatlabel>
+        <mat-label>Name</mat-label>
+        <input
+          matInput
+          placeholder="Name"
+          formControlName="name"
+          type="text"
+          name="name"
+        />
+        <mat-error *ngIf="form.get('name')">Required Field</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width" appearance="outline" floatlabel>
+        <mat-label>Description</mat-label>
+        <input
+          matInput
+          placeholder="Description"
+          formControlName="description"
+          type="text"
+          name="description"
+        />
+        <mat-error *ngIf="form.get('description')">Required Field</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width" appearance="outline" floatlabel>
+        <mat-label>Years Known</mat-label>
+        <input
+          matInput
+          placeholder="Years Known"
+          formControlName="yearsKnown"
+          type="number"
+          name="yearsKnown"
+        />
+        <mat-error *ngIf="form.get('yearsKnown')">Required Field</mat-error>
+      </mat-form-field>
+      <section class="full-width">
+        <mat-label>
+          Coolness-level: {{ form.get('coolnessLevel')?.value }} / 100
+        </mat-label>
+        <mat-slider
+          formControlName="coolnessLevel"
+          class="full-width"
+          min="0"
+          max="100"
+          thumbLabel
+          tickInterval="1"
+        ></mat-slider>
+      </section>
+      <section>
+        <mat-checkbox placeHolder="CloseFriend" formControlName="closeFriend"
+          >Close Friend?</mat-checkbox
+        >
+      </section>
+    </mat-card-content>
+    <mat-card-actions>
+      <button type="submit" mat-button [disabled]="form.invalid">
+        {{ currentFriend.id ? 'Submit' : 'Create' }}
+      </button>
+      <button type="button" mat-button (click)="cancel()">Cancel</button>
+    </mat-card-actions>
+  </form>
+</mat-card>

@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="col-50" layout="row" layout-align="center center">
+    <humans-friends-list
+      [friends]="friends$ | async"
+      (selected)="selectFriend($event)"
+      (deleted)="deleteFriend($event)"
+    ></humans-friends-list>
+  </div>
+  <div class="col-50" layout="row" layout-align="center center">
+    <humans-friend-details
+      [form]="form"
+      [friend]="selectedFriend$ | async"
+      (saved)="saveFriend($event)"
+      (cancelled)="cancel()"
+    ></humans-friend-details>
+  </div>
+</div>
